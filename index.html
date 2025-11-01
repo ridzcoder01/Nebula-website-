@@ -389,29 +389,242 @@
             .hero-subtitle { font-size: 1.25rem; }
         }
 
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.25rem;
-            align-items: center;
-                        align-text: center;
-            justify-content: center;
-        }
+/* Hero Buttons */
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .hero-buttons .btn {
-            min-width: 200px;
-        }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        @media (max-width: 640px) {
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-            .hero-buttons .btn { 
-                width: 100%;
-                max-width: 300px;
-            }
-        }
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+    box-shadow: 
+        0 5px 15px rgba(78, 205, 196, 0.3),
+        0 0 20px rgba(78, 205, 196, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 10px 25px rgba(78, 205, 196, 0.4),
+        0 0 30px rgba(78, 205, 196, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-large {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+}
+
+/* Specific Button Styles */
+.btn-primary:nth-child(1) {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    box-shadow: 
+        0 5px 15px rgba(255, 107, 107, 0.3),
+        0 0 20px rgba(255, 107, 107, 0.2);
+}
+
+.btn-primary:nth-child(1):hover {
+    box-shadow: 
+        0 10px 25px rgba(255, 107, 107, 0.4),
+        0 0 30px rgba(255, 107, 107, 0.3);
+}
+
+.btn-primary:nth-child(2) {
+    background: linear-gradient(135deg, #45b7d1, #3ca0b8);
+    box-shadow: 
+        0 5px 15px rgba(69, 183, 209, 0.3),
+        0 0 20px rgba(69, 183, 209, 0.2);
+}
+
+.btn-primary:nth-child(2):hover {
+    box-shadow: 
+        0 10px 25px rgba(69, 183, 209, 0.4),
+        0 0 30px rgba(69, 183, 209, 0.3);
+}
+
+/* Button Icons */
+.btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover i {
+    transform: scale(1.2);
+}
+
+/* Button Pulse Animation */
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 
+            0 5px 15px rgba(78, 205, 196, 0.3),
+            0 0 20px rgba(78, 205, 196, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 5px 20px rgba(78, 205, 196, 0.5),
+            0 0 25px rgba(78, 205, 196, 0.4);
+    }
+}
+
+.btn-primary:nth-child(1) {
+    animation: buttonPulse 3s ease-in-out infinite;
+}
+
+.btn-primary:nth-child(2) {
+    animation: buttonPulse 3s ease-in-out infinite 1.5s;
+}
+
+/* Button Glow Effect */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d, #ff6b6b, #45b7d1);
+    border-radius: 52px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn:hover::after {
+    opacity: 0.3;
+}
+
+/* Specific button gradient borders */
+.btn-primary:nth-child(1)::after {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52, #4ecdc4);
+}
+
+.btn-primary:nth-child(2)::after {
+    background: linear-gradient(135deg, #45b7d1, #3ca0b8, #4ecdc4);
+}
+
+/* Loading State (Optional) */
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn {
+        width: 250px;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+    }
+    
+    .btn-large {
+        padding: 1.1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-buttons {
+        margin-top: 2rem;
+    }
+    
+    .btn {
+        width: 220px;
+        font-size: 1rem;
+        padding: 0.9rem 1.5rem;
+    }
+    
+    .btn-large {
+        padding: 1rem 1.8rem;
+    }
+}
+
+/* Button Focus States for Accessibility */
+.btn:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 3px rgba(255, 255, 255, 0.1),
+        0 0 0 5px rgba(78, 205, 196, 0.3);
+}
+
+.btn-primary:nth-child(1):focus {
+    box-shadow: 
+        0 0 0 3px rgba(255, 255, 255, 0.1),
+        0 0 0 5px rgba(255, 107, 107, 0.3);
+}
+
+.btn-primary:nth-child(2):focus {
+    box-shadow: 
+        0 0 0 3px rgba(255, 255, 255, 0.1),
+        0 0 0 5px rgba(69, 183, 209, 0.3);
+}
+
+/* Button Active State */
+.btn:active {
+    transform: translateY(-1px);
+    transition: transform 0.1s ease;
+}
 
         /* Improved grid layout with better responsive behavior */
         .hero-grid {
@@ -542,16 +755,310 @@
             }
         }
 
-        /* Features Section */
-        .features-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(180deg, var(--dark-bg) 0%, var(--card-bg) 100%);
-        }
+       /* Features Section */
+.features-section {
+    padding: 6rem 2rem;
+    background: rgba(10, 15, 30, 0.9);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
 
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.features-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+    background-size: 400% 400%;
+    animation: particleFloat 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-label {
+    display: inline-block;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+}
+
+.section-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Feature Card */
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.7s ease;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(78, 205, 196, 0.5);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(78, 205, 196, 0.2);
+}
+
+/* Feature Icon */
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color, #4ecdc4), var(--secondary-color, #44a08d));
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 25px rgba(78, 205, 196, 0.4);
+}
+
+.feature-icon::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    border-radius: 25px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover .feature-icon::after {
+    opacity: 0.3;
+}
+
+/* Feature Content */
+.feature-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feature-description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Scroll Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.scroll-animate.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation for cards */
+.features-grid .feature-card:nth-child(1) { transition-delay: 0.1s; }
+.features-grid .feature-card:nth-child(2) { transition-delay: 0.2s; }
+.features-grid .feature-card:nth-child(3) { transition-delay: 0.3s; }
+.features-grid .feature-card:nth-child(4) { transition-delay: 0.4s; }
+.features-grid .feature-card:nth-child(5) { transition-delay: 0.5s; }
+.features-grid .feature-card:nth-child(6) { transition-delay: 0.6s; }
+
+/* Individual Icon Colors */
+.feature-card:nth-child(1) .feature-icon {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+}
+
+.feature-card:nth-child(2) .feature-icon {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.feature-card:nth-child(3) .feature-icon {
+    background: linear-gradient(135deg, #45b7d1, #3ca0b8);
+}
+
+.feature-card:nth-child(4) .feature-icon {
+    background: linear-gradient(135deg, #96ceb4, #85baa1);
+}
+
+.feature-card:nth-child(5) .feature-icon {
+    background: linear-gradient(135deg, #feca57, #e6b64c);
+}
+
+.feature-card:nth-child(6) .feature-icon {
+    background: linear-gradient(135deg, #ff9ff3, #e68cd9);
+}
+
+/* Animations */
+@keyframes particleFloat {
+    0%, 100% {
+        background-position: 0% 0%;
+        opacity: 0.3;
+    }
+    25% {
+        background-position: 100% 0%;
+        opacity: 0.5;
+    }
+    50% {
+        background-position: 100% 100%;
+        opacity: 0.3;
+    }
+    75% {
+        background-position: 0% 100%;
+        opacity: 0.5;
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(78, 205, 196, 0.6);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .features-section {
+        padding: 4rem 1rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-description {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .feature-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* Optional: Add floating animation to cards */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.feature-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0s; }
+.feature-card:nth-child(2) { animation-delay: 1s; }
+.feature-card:nth-child(3) { animation-delay: 2s; }
+.feature-card:nth-child(4) { animation-delay: 3s; }
+.feature-card:nth-child(5) { animation-delay: 4s; }
+.feature-card:nth-child(6) { animation-delay: 5s; }
 
         .section-header {
             text-align: center;
@@ -1197,29 +1704,7 @@ body.page-glow {
     position: relative;
     overflow-x: hidden;
     
-    /* Animated Gradient Background */
-    background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-}
 
-/* Border Glow Effect */
-body.page-glow::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2px solid transparent;
-    border-image: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4) 1;
-    box-shadow: 
-        0 0 30px rgba(255, 107, 107, 0.4),
-        inset 0 0 30px rgba(77, 208, 225, 0.2);
-    pointer-events: none;
-    z-index: 1000;
-    animation: borderPulse 3s ease-in-out infinite;
-}
 
 /* Floating Particles */
 body.page-glow::after {
@@ -1372,6 +1857,353 @@ body.page-glow::after {
     0%, 100% { opacity: 0.2; }
     50% { opacity: 1; }
 }
+
+/* Owner Section Styles */
+.owner-section {
+    padding: 5rem 2rem;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.owner-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 3px;
+}
+
+.section-divider {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+    margin: 1rem auto;
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Owner Profile Layout */
+.owner-profile {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 4rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Owner Image Styles */
+.owner-image-container {
+    position: relative;
+    text-align: center;
+}
+
+.owner-image-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 2rem;
+}
+
+.owner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1) border-box;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    position: relative;
+    z-index: 2;
+}
+
+.image-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    border-radius: 30px;
+    filter: blur(20px);
+    opacity: 0.5;
+    animation: glowPulse 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+.status-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    background: #4ecdc4;
+    border-radius: 50%;
+    border: 3px solid #0f172a;
+    box-shadow: 0 0 10px #4ecdc4;
+    animation: statusPulse 2s infinite;
+    z-index: 3;
+}
+
+.owner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+}
+
+/* Owner Info Styles */
+.owner-info {
+    color: white;
+}
+
+.owner-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.owner-title {
+    font-size: 1.3rem;
+    color: #4ecdc4;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.owner-bio {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2.5rem;
+    border-left: 3px solid #4ecdc4;
+    padding-left: 1.5rem;
+}
+
+/* Stats */
+.owner-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    border-color: #4ecdc4;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4ecdc4;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Skills */
+.owner-skills {
+    margin-bottom: 2.5rem;
+}
+
+.owner-skills h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.skill-tag {
+    background: rgba(78, 205, 196, 0.1);
+    color: #4ecdc4;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(78, 205, 196, 0.3);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background: rgba(78, 205, 196, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.2);
+}
+
+/* Contact Buttons */
+.owner-contact {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.whatsapp-btn {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white;
+}
+
+.email-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes glowPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px #4ecdc4;
+    }
+    50% {
+        box-shadow: 0 0 20px #4ecdc4, 0 0 30px #4ecdc4;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .owner-profile {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .owner-image-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .owner-name {
+        font-size: 2rem;
+    }
+    
+    .owner-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .owner-contact {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .owner-section {
+        padding: 3rem 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .owner-name {
+        font-size: 1.8rem;
+    }
+    
+    .contact-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
     </style>
 </head>
 <body class="page-glow">
@@ -1399,7 +2231,7 @@ body.page-glow::after {
                     <a href="https://github.com/ridz-coder01/NEBULA-MD/fork" class="btn btn-primary btn-large">
                         <i class="fas fa-qrcode"></i> Fork Repo
                     </a>
-                              <a href="https://github.com/ridz-coder01/NEBULA-MD/fork" class="btn btn-primary btn-large">
+                              <a href="https:nebulasession.zone.id" class="btn btn-primary btn-large">
                         <i class="fas fa-rocket"></i> Get Pair Code 
                     </a>
                 </div>
@@ -1407,6 +2239,83 @@ body.page-glow::after {
 
         </div>
     </section>
+
+
+    <!-- Owner Section -->
+    <section class="owner-section" id="owner">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">MEET THE FOUNDER</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">The Vision Behind Nebula Assassin</p>
+            </div>
+
+            <div class="owner-profile">
+                <div class="owner-image-container">
+                    <div class="owner-image-wrapper">
+                        <img src="https://files.catbox.moe/pdwojr.jpg" alt="Nebula Assassin Founder" class="owner-image">
+                        <div class="image-glow"></div>
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="owner-badge">
+                        <i class="fas fa-crown"></i>
+                        FOUNDER & CEO
+                    </div>
+                </div>
+
+                <div class="owner-info">
+                    <h1 class="owner-name">RIDZ CODER</h1>
+                    <div class="owner-title">Lead Developer & Visionary</div>
+                    
+                    <p class="owner-bio">
+                        With over 3 years of experience in messaging technology and cybersecurity, 
+                        Ridz Coder founded Nebula Assassin to revolutionize WhatsApp services. 
+                        His passion for innovation and commitment to excellence drives our 
+                        mission to deliver premium communication solutions.
+                    </p>
+
+                    <div class="owner-stats">
+                        <div class="stat">
+                            <div class="stat-number">3+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Client Satisfaction</div>
+                        </div>
+                    </div>
+
+                    <div class="owner-skills">
+                        <h3>Expertise</h3>
+                        <div class="skills-list">
+                            <span class="skill-tag">WhatsApp API</span>
+                            <span class="skill-tag">Cybersecurity</span>
+                            <span class="skill-tag">Bot Development</span>
+                            <span class="skill-tag">Cloud Infrastructure</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">Encryption</span>
+                        </div>
+                    </div>
+
+                    <div class="owner-contact">
+                        <a href="https://wa.me/263714732501" class="contact-btn whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i>
+                            Contact on WhatsApp
+                        </a>
+                        <a href="mailto: smtechofcmods@gmail.com" class="contact-btn email-btn">
+                            <i class="fas fa-envelope"></i>
+                            Send Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Features Section -->
     <section class="features-section" id="features">
@@ -1650,9 +2559,91 @@ document.addEventListener('DOMContentLoaded', function() {
         starsContainer.appendChild(star);
     }
 });
-    </script>
 
 
-
-
+// Scroll animation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    
+    const elementInView = (el, dividend = 1) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+            elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+        );
+    };
+    
+    const displayScrollElement = (element) => {
+        element.classList.add('animated');
+    };
+    
+    const hideScrollElement = (element) => {
+        element.classList.remove('animated');
+    };
+    
+    const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+            if (elementInView(el, 1.2)) {
+                displayScrollElement(el);
+            } else {
+                hideScrollElement(el);
+            }
+        });
+    };
+    
+    // Initial check
+    handleScrollAnimation();
+    
+    // Listen for scroll
+    window.addEventListener('scroll', () => {
+        handleScrollAnimation();
+    });
+});
+// Button interaction effects
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+        // Add ripple effect on click
+        button.addEventListener('click', function(e) {
+            // Remove any existing ripple
+            const existingRipple = this.querySelector('.btn-ripple');
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+            
+            // Create ripple element
+            const ripple = document.createElement('span');
+            ripple.className = 'btn-ripple';
+            
+            // Get button position and size
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            // Set ripple styles
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            this.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Add loading state (optional)
+        button.addEventListener('click', function() {
+            if (this.href.includes('github.com')) {
+                this.classList.add('loading');
+                setTimeout(() => {
+                    this.classList.remove('loading');
+                }, 2000);
+            }
+        });
+    });
+});
+</script>
 </body></html>
