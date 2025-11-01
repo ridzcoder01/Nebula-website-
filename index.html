@@ -2645,5 +2645,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Add this script to handle broken images
+document.addEventListener('DOMContentLoaded', function() {
+    const ownerImage = document.querySelector('.owner-image');
+    
+    ownerImage.addEventListener('error', function() {
+        // Hide broken image
+        this.style.display = 'none';
+        
+        // Show placeholder
+        const placeholder = document.createElement('div');
+        placeholder.className = 'owner-image-placeholder';
+        placeholder.innerHTML = '<span>NA</span>';
+        
+        this.parentNode.appendChild(placeholder);
+    });
+    
+    // Check if image loaded successfully after 3 seconds
+    setTimeout(() => {
+        if (!ownerImage.complete || ownerImage.naturalHeight === 0) {
+            ownerImage.dispatchEvent(new Event('error'));
+        }
+    }, 3000);
+});
 </script>
 </body></html>
