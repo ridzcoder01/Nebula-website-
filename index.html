@@ -2250,22 +2250,52 @@ body.page-glow::after {
                 <p class="section-subtitle">The Vision Behind Nebula Assassin</p>
             </div>
 
-            <div class="owner-profile">
-                <div class="owner-image-container">
-                    <div class="owner-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nebula Assassin Founder" class="owner-image">
-                        <div class="image-glow"></div>
-                        <div class="status-indicator"></div>
-                    </div>
-                    <div class="owner-badge">
-                        <i class="fas fa-crown"></i>
-                        FOUNDER & CEO
-                    </div>
-                </div>
+    <div class="profile-card-container">
+        <div class="profile-card">
+            <div class="profile-image-container">
+                <img src="https://files.catbox.moe/pdwojr.jpg" alt="Nebula Assassin" class="profile-image">
+                <div class="image-glow"></div>
+                <div class="status-indicator"></div>
+            </div>
+            
+            <div class="profile-badge">
+                <i class="fas fa-crown"></i>
+                FOUNDER & CEO
+            </div>
+            
+            <h2 class="profile-name">RIDZ CODER</h2>
+            <p class="profile-title">Lead Developer & Visionary</p>
+            
+            <button class="message-button">
+                <i class="fab fa-whatsapp"></i>
+                Message Me
+            </button>
+        </div>
+    </div>
 
-                <div class="owner-info">
-                    <h1 class="owner-name">RIDZ CODER</h1>
-                    <div class="owner-title">Lead Developer & Visionary</div>
+    <script>
+        // Add click event to message button
+        document.querySelector('.message-button').addEventListener('click', function() {
+            window.open('https://wa.me/263714732501', '_blank');
+        });
+
+        // Add subtle floating animation to the card
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.profile-card');
+            
+            // Add mouse move effect
+            document.addEventListener('mousemove', function(e) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `translateY(-10px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            
+            // Reset when mouse leaves
+            document.addEventListener('mouseleave', function() {
+                card.style.transform = 'translateY(-10px) rotateY(0deg) rotateX(0deg)';
+            });
+        });
+    </script>
                     
                     <p class="owner-bio">
                         With over 3 years of experience in messaging technology and cybersecurity, 
