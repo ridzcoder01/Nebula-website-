@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /$
+Allow: /index.html
+Allow: /manifest.json
+Allow: /assets/
+Allow: /images/
+Allow: /icons/
+Allow: /css/
+Allow: /js/
+
+Disallow: /api/
+Disallow: /config/
+Disallow: /sessions/
+Disallow: /lib/
+Disallow: /node_modules/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /server/
+
+Sitemap: https://nebulatechbots.zone.id/sitemap.xml
+Crawl-delay: 10
